@@ -150,35 +150,3 @@ osascript -e "tell application \"Finder\" to set visible of process \"Folx GO+\"
 chmod -R 777 /Users/localadmin/Downloads
 
 exit 0
-############################################################################
-##########Version###########################
-
-echo "getting xml template"
-UUiD=`uuidgen`
-mkdir /tmp/$UUiD
-curl -L --proxy 10.141.24.32:8080 -s http://phobos.apple.com/versions --connect-timeout 10 2>&1 > /tmp/$UUiD/versions.xml
-
-Size=`stat -r /tmp/$UUiD/version.xml | awk '{ print $8}'`
-
-if [ "$Size" == "0" ]
-then
-echo "version.xml has no data. trying a new proxy."
-curl -L --proxy 10.141.24.33:8080 -s http://phobos.apple.com/versions --connect-timeout 10 2>&1 > /tmp/$UUiD/versions.xml
-Size=`stat -r /tmp/$UUiD/version.xml | awk '{ print $8}'`
-
-if [ "$Size" == "0" ]
-then
-echo "version.xml has no data. trying a new proxy."
-curl -L --proxy 10.xxx.yyy.zzz:8080 -s http://phobos.apple.com/versions --connect-timeout 10 2>&1 > /tmp/$UUiD/versions.xml
-Size=`stat -r /tmp/$UUiD/version.xml | awk '{ print $8}'`
-if [ "$Size" == "0" ]
-then
-exit 1
-fi
-else
-echo "got xml template"
-fi
-else
-echo "got xml template"
-fi
-exit 0
