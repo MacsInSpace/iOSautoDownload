@@ -1,20 +1,20 @@
 #!/bin/bash
-if [ ! -d /Users/Shared/.iOS ]; then
-  mkdir -p /Users/Shared/.iOS;
-fi;
-
-chmod -fR 777 /Users/Shared/.iOS
 
 URL="http://phobos.apple.com/versions"
 wd="/Users/Shared/.iOS"
+
+if [ ! -d $wd ]; then
+  mkdir -p $wd;
+fi;
+
+chmod -fR 777 $wd
+
 cd $wd
 
 #while true; do
 if [ ! -d .new_versions.xml ]; then
   curl --proxy 10.xx.yy.zz:8080 -L -o .new_versions.xml -s $URL > /dev/null 2>&1;
 fi;
-
-#add file size check and try another proxy
 
 if [[ -f .new_versions.xml ]]; then
   mv .new_versions.xml .old_versions.xml
