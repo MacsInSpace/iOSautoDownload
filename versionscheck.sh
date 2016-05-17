@@ -25,7 +25,7 @@ chmod -fR 777 $td
 cd $wd
 
 #while true; do
-if [ ! -d new_versions.xml ]; then
+if [ ! -f new_versions.xml ]; then
   #curl --proxy $PrX -L -o .new_versions.xml -s $URL > /dev/null 2>&1;
   curl -L -o new_versions.xml -s $URL > /dev/null 2>&1
   
@@ -40,16 +40,16 @@ if [ ! -f old_versions.xml ]; then
   mv new_versions.xml old_versions.xml
   exit 0
 fi
-
+#NOT WORKING FROM HERE DOWN
 #add file size check to see if it has been updated.
-
 diff ./new_versions.xml ./old_versions.xml > /dev/null 2>&1
 
 if [[ $? -ne 0 ]]; then
   echo "updated XML. proceeding."
+
 #List iOS iPads
   cat ./new_versions.xml | grep 'http' | grep 'ipsw' | grep 'iPad' | sort -u | cut -d '>' -f 2 | cut -d '<' -f 1 > ./iPadNew.txt
-if [ ! -f iPadNew.txt ]; then
+if [ ! -f iPadOld.txt ]; then
   mv iPadNew.txt iPadOld.txt
   exit 0
 fi
@@ -59,7 +59,7 @@ iPadLinks=`cat iPadNewToDownload.txt`
 
 #List iOS ATVs
   cat ./new_versions.xml | grep 'http' | grep 'ipsw' | grep 'ATV' | sort -u | cut -d '>' -f 2 | cut -d '<' -f 1 > ./ATVNew.txt
-if [ ! -f ATVNew.txt ]; then
+if [ ! -f ATVOld.txt ]; then
   mv ATVNew.txt ATVOld.txt
   exit 0
 fi
