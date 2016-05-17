@@ -1,22 +1,31 @@
 #!/bin/bash
-
-URL="http://phobos.apple.com/version"
+#versions url
+URL="http://phobos.apple.com/versions"
+#working directory
 wd="/Users/localadmin/Desktop/iOS"
-NewSize=`stat -r "$wd/new_versions.xml" | awk '{ print $8}'`
-
 #wd="/Users/Shared/.iOS"
+#temporary working directory
+td="/tmp/.iOS"
+#New file size check to make sure not 0kb
+NewSize=`stat -r "$wd/new_versions.xml" | awk '{ print $8}'`
+#Proxy:P0rt
+PrX=10.xx.yy.zz:8080
 
 if [ ! -d $wd ]; then
   mkdir -p $wd;
 fi;
-
 chmod -fR 777 $wd
+
+if [ ! -d $td ]; then
+  mkdir -p $td;
+fi;
+chmod -fR 777 $td
 
 cd $wd
 
 #while true; do
 if [ ! -d new_versions.xml ]; then
-  #curl --proxy 10.xx.yy.zz:8080 -L -o .new_versions.xml -s $URL > /dev/null 2>&1;
+  #curl --proxy $PrX -L -o .new_versions.xml -s $URL > /dev/null 2>&1;
   curl -L -o new_versions.xml -s $URL > /dev/null 2>&1;
   if [ $Size -eq 0 ]
             then
@@ -33,10 +42,10 @@ if [[ -f new_versions.xml ]]; then
   mv new_versions.xml old_versions.xml
 fi
 
-#curl --proxy 10.xx.yy.zz:8080 -L -o .new_versions.xml -s $URL > /dev/null 2>&1
+#curl --proxy $PrX -L -o .new_versions.xml -s $URL > /dev/null 2>&1
 curl -L -o new_versions.xml -s $URL > /dev/null 2>&1;
 #curl -L -o ./.new_versions.xml -s $URL > /dev/null 2>&1;
-diff ./new_versions.xml ./old_versions.xml > /dev/null
+diff ./new_versions.xml ./old_versions.xml > /dev/null 2>&1;
 #diff ./.new_versions.xml ./.old_versions.xml > /dev/null 2>&1;
 
 #add file size check and try another proxy
@@ -55,10 +64,21 @@ diff /Users/localadmin/Downloads/AppleTV.ipsw.CheckOld.txt /Users/localadmin/Dow
 diff /Users/localadmin/Downloads/iPad.ipsw.CheckOld.txt /Users/localadmin/Downloads/iPad.ipsw.CheckNew.txt | grep ">" | sed 's/^> //g' > /Users/localadmin/Downloads/iPad.ipsw.ToDownload.txt
 cd /Users/localadmin/Downloads
 
+#read new links
+Links=`cat /Users/localadmin/Downloads/iPad.ipsw.ToDownload.txt`
 
 
+#download links list
+for url in $Links; do
 
+if curl --fail -L --proxy $PrX "$url"; then
+    echo success # …(success)
+else
+    curl --fail -L --proxy $PrX "$url" # …(failure)
+fi;
 
+done
+sleep 10
 
 
 else
