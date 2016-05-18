@@ -8,7 +8,10 @@ Dd=/User/ladmin/Downloads
 #temporary working directory
 td="/tmp/.iOS"
 #Proxy:P0rt
-PrX=10.xx.yy.zz:8080
+export http_proxy=http://10.xx.yy.zz:8080
+export https_proxy=$http_proxy
+export HTTP_PROXY=$http_proxy
+export HTTPS_PROXY=$http_proxy
 
 #create working and temporary directories if not there already
 if [ ! -d $wd ]; then
@@ -25,11 +28,9 @@ cd $wd
 
 #check for new versions 
 if [ ! -f old_versions.xml ]; then
-  #curl --proxy $PrX -L -o .new_versions.xml -s $URL > /dev/null 2>&1;
   curl -L -o old_versions.xml -s $URL --connect-timeout 20 2>&1;
   exit 0
   else
-  #curl --proxy $PrX -L -o .new_versions.xml -s $URL > /dev/null 2>&1;
   curl -L -o new_versions.xml -s $URL --connect-timeout 20 2>&1;
 fi
 
