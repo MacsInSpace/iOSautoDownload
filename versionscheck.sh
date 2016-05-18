@@ -4,13 +4,13 @@ URL="http://phobos.apple.com/versions"
 #working directory
 #wd="/Users/localadmin/Desktop/iOS"
 wd="/Users/Shared/.iOS"
-Dd=/User/localadmin/Downloads
+Dd=/User/ladmin/Downloads
 #temporary working directory
 td="/tmp/.iOS"
 #Proxy:P0rt
 PrX=10.xx.yy.zz:8080
 
-#create working and temporaary directories if not there already
+#create working and temporary directories if not there already
 if [ ! -d $wd ]; then
   mkdir -p $wd;
 fi;
@@ -74,9 +74,11 @@ iPodLinks=`cat iPodNewToDownload.txt`
 rm 1.xml 
 rm 2.xml
 rm diff.xml
-rm iPadNewToDownload.txt
-rm ATVNewToDownload.txt
-
+#rm iPadNewToDownload.txt
+#rm ATVNewToDownload.txt
+#rm iPhoneNewToDownload.txt
+#rm iPodNewToDownload.txt
+#rm iwatchNewToDownload.txt
 cd $td
 
 #download links list
