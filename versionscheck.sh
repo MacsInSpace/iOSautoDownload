@@ -95,31 +95,31 @@ cd $td
 for url in $iPadLinks; do
 with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 file=`echo ${url##*/}`
-mv -R $td/$file $Dd/
+mv $td/$file $Dd/
 done
 
 for url in $ATVLinks; do
 with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 file=`echo ${url##*/}`
-mv -R $td/$file $Dd/
+mv $td/$file $Dd/
 done
 
 #for url in $iPodLinks; do
 #with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 #file=`echo ${url##*/}`
-#mv -R $td/$file $Dd/
+#mv $td/$file $Dd/
 #done
 
 #for url in $iPhoneLinks; do
 #with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 #file=`echo ${url##*/}`
-#mv -R $td/$file $Dd/
+#mv $td/$file $Dd/
 #done
 
 #for url in $iwatchLinks; do
 #with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 #file=`echo ${url##*/}`
-#mv -R $td/$file $Dd/
+#mv $td/$file $Dd/
 #done
 
 
