@@ -4,7 +4,7 @@ URL="http://phobos.apple.com/versions"
 #working directory
 #wd="/Users/localadmin/Desktop/iOS"
 wd="/Users/Shared/.iOS"
-Dd=/User/ladmin/Downloads
+Dd=/Users/ladmin/Downloads
 #temporary working directory
 td="/var/tmp/.iOS"
 #Proxy:P0rt
