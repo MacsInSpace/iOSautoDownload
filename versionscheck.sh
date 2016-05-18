@@ -79,29 +79,32 @@ rm diff.xml
 #rm iPhoneNewToDownload.txt
 #rm iPodNewToDownload.txt
 #rm iwatchNewToDownload.txt
+
+#Move to tepmorary directory to download. If we loose power, we dont want half downloaded files taking up space.
+#My site always looses power
 cd $td
 
 #download links list
 for url in $iPadLinks; do
-#if curl --fail -L --proxy $PrX "$url"; then
-if curl --fail -L "$url"; then
-    echo success # …(success)
-else
-    #curl --fail -L --proxy $PrX "$url" # …(failure)
-    curl --fail -L "$url" # …(failure)
-fi
+curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
+done
 
-done
-sleep 10
 for url in $ATVLinks; do
-#if curl --fail -L --proxy $PrX "$url"; then
-if curl --fail -L "$url"; then
-    echo success # …(success)
-else
-    #curl --fail -L --proxy $PrX "$url" # …(failure)
-    curl --fail -L "$url" # …(failure)
-fi
+curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
 done
+
+#for url in $iPodLinks; do
+#curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
+#done
+
+#for url in $iPhoneLinks; do
+#curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
+#done
+
+#for url in $iwatchLinks; do
+#curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
+#done
+
 else
   echo "No change"
   date
@@ -111,7 +114,6 @@ else
   date
   exit 0
 fi
-
 
 mv -R $td/*.ipsw $Dd/
 #done
