@@ -90,32 +90,33 @@ cd $td
 #download links list
 for url in $iPadLinks; do
 #curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-curl -L "$url"--retry 10 --retry-max-time 0 -C -
+curl -O "$url" --retry 10 --retry-max-time 0 -C -
 done
 
 for url in $ATVLinks; do
 #curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-curl -L "$url"--retry 10 --retry-max-time 0 -C -
+curl -O "$url" --retry 10 --retry-max-time 0 -C -
 done
 
 #for url in $iPodLinks; do
 #curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-#curl -L "$url"--retry 10 --retry-max-time 0 -C -
+#curl -L "$url" --retry 10 --retry-max-time 0 -C -
 #done
 
 #for url in $iPhoneLinks; do
 #curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-#curl -L "$url"--retry 10 --retry-max-time 0 -C -
+#curl -L "$url" --retry 10 --retry-max-time 0 -C -
 #done
 
 #for url in $iwatchLinks; do
 #curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-#curl -L "$url"--retry 10 --retry-max-time 0 -C -
+#curl -L "$url" --retry 10 --retry-max-time 0 -C -
 #done
 
 else
   echo "No change"
   date
+  exit 0
   fi
 else
   echo "No change"
