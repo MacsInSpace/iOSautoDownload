@@ -48,25 +48,27 @@ if [[ $? -ne 0 ]]; then
   echo "updated XML. proceeding."
 
 #List iOS iPads
-  cat ./new_versions.xml | grep 'http' | grep 'ipsw' | grep 'iPad' | sort -u | cut -d '>' -f 2 | cut -d '<' -f 1 > ./iPadNew.txt
-if [ ! -f iPadOld.txt ]; then
-  mv iPadNew.txt iPadOld.txt
-  exit 0
-fi
-diff iPadOld.txt iPadNew.txt | grep ">" | sed 's/^> //g' > iPadNewToDownload.txt
+xmllint --c14n old_versions.xml > 1.xml
+xmllint --c14n new_versions.xml > 2.xml
+diff 1.xml 2.xml > diff.xml
+if [[ $? -ne 0 ]]; then
+  echo "updated XML. proceeding."
+
+#List iOS iPads
+  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPad' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iPadNewToDownload.txt
 #read new links
 iPadLinks=`cat iPadNewToDownload.txt`
-
 #List iOS ATVs
-  cat ./new_versions.xml | grep 'http' | grep 'ipsw' | grep 'ATV' | sort -u | cut -d '>' -f 2 | cut -d '<' -f 1 > ./ATVNew.txt
-if [ ! -f ATVOld.txt ]; then
-  mv ATVNew.txt ATVOld.txt
-  exit 0
-fi
-diff ATVOld.txt ATVNew.txt | grep ">" | sed 's/^> //g' > ATVNewToDownload.txt
+  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'ATV' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > ATVNewToDownload.txt
 #read new links
 ATVLinks=`cat ATVNewToDownload.txt`
 
+#cleanup diffs
+rm 1.xml 
+rm 2.xml
+rm diff.xml
+rm iPadNewToDownload.txt
+rm ATVNewToDownload.txt
 
 cd $td
 
@@ -91,12 +93,17 @@ else
     curl --fail -L "$url" # …(failure)
 fi
 done
-
+else
+  echo "No change"
+  date
+  fi
 else
   echo "No change"
   date
   exit 0
 fi
+
+
 mv -R $td/*.ipsw $Dd/
 #done
 #sleep 3600
