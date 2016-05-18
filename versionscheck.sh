@@ -90,28 +90,23 @@ cd $td
 
 #download links list
 for url in $iPadLinks; do
-#curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-curl -O "$url" --retry 10 --retry-max-time 0 -C -
+export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
 done
 
 for url in $ATVLinks; do
-#curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-curl -O "$url" --retry 10 --retry-max-time 0 -C -
+export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
 done
 
 #for url in $iPodLinks; do
-#curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-#curl -L "$url" --retry 10 --retry-max-time 0 -C -
+#export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
 #done
 
 #for url in $iPhoneLinks; do
-#curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-#curl -L "$url" --retry 10 --retry-max-time 0 -C -
+#export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
 #done
 
 #for url in $iwatchLinks; do
-#curl --proxy $PrX -L "$url"--retry 10 --retry-max-time 0 -C -
-#curl -L "$url" --retry 10 --retry-max-time 0 -C -
+#export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
 #done
 
 #move ipsw's to folder for auto sorting with Hazel https://www.noodlesoft.com/
