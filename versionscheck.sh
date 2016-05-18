@@ -73,15 +73,16 @@ iPodLinks=`cat iPodNewToDownload.txt`
 
 
 
-#cleanup diffs
+#cleanup diffs and xml
 rm 1.xml 
 rm 2.xml
 rm diff.xml
-#rm iPadNewToDownload.txt
-#rm ATVNewToDownload.txt
-#rm iPhoneNewToDownload.txt
-#rm iPodNewToDownload.txt
+rm iPadNewToDownload.txt
+rm ATVNewToDownload.txt
+rm iPhoneNewToDownload.txt
+rm iPodNewToDownload.txt
 #rm iwatchNewToDownload.txt
+mv new_versions.xml old_versions.xml
 
 #Move to tepmorary directory to download. If we loose power, we dont want half downloaded files taking up space.
 #My site always looses power
@@ -113,6 +114,9 @@ done
 #curl -L "$url" --retry 10 --retry-max-time 0 -C -
 #done
 
+#move ipsw's to folder for auto sorting with Hazel https://www.noodlesoft.com/
+mv -R $td/*.ipsw $Dd/
+
 else
   echo "No change"
   date
@@ -124,7 +128,7 @@ else
   exit 0
 fi
 
-mv -R $td/*.ipsw $Dd/
+
 #done
 #sleep 3600
 exit 0
