@@ -13,6 +13,44 @@ export https_proxy=$http_proxy
 export HTTP_PROXY=$http_proxy
 export HTTPS_PROXY=$http_proxy
 
+
+#Awesome function for curl retries from http://stackoverflow.com/questions/8350942/how-to-re-run-the-curl-command-automatically-when-the-error-occurs
+#credit to https://github.com/phs
+
+function with_backoff {
+  local max_attempts=${ATTEMPTS-5}
+  local timeout=${TIMEOUT-1}
+  local attempt=0
+  local exitCode=0
+
+  while (( $attempt < $max_attempts ))
+  do
+    set +e
+    "$@"
+    exitCode=$?
+    set -e
+
+    if [[ $exitCode == 0 ]]
+    then
+      break
+    fi
+
+    echo "Failure! Retrying in $timeout.." 1>&2
+    sleep $timeout
+    attempt=$(( attempt + 1 ))
+    timeout=$(( timeout * 2 ))
+  done
+
+  if [[ $exitCode != 0 ]]
+  then
+    echo "You've failed me for the last time! ($@)" 1>&2
+  fi
+
+  return $exitCode
+}
+
+
+
 #create working and temporary directories if not there already
 if [ ! -d $wd ]; then
   mkdir -p $wd;
@@ -134,43 +172,4 @@ else
   exit 0
 fi
 
-#Awesome function for curl retries from http://stackoverflow.com/questions/8350942/how-to-re-run-the-curl-command-automatically-when-the-error-occurs
-#credit to https://github.com/phs
-
-function with_backoff {
-  local max_attempts=${ATTEMPTS-5}
-  local timeout=${TIMEOUT-1}
-  local attempt=0
-  local exitCode=0
-
-  while (( $attempt < $max_attempts ))
-  do
-    set +e
-    "$@"
-    exitCode=$?
-    set -e
-
-    if [[ $exitCode == 0 ]]
-    then
-      break
-    fi
-
-    echo "Failure! Retrying in $timeout.." 1>&2
-    sleep $timeout
-    attempt=$(( attempt + 1 ))
-    timeout=$(( timeout * 2 ))
-  done
-
-  if [[ $exitCode != 0 ]]
-  then
-    echo "You've failed me for the last time! ($@)" 1>&2
-  fi
-
-  return $exitCode
-}
-
-
-
-#done
-#sleep 3600
 exit 0
