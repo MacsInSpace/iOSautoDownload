@@ -8,7 +8,7 @@ Dd=/User/localadmin/Downloads
 #temporary working directory
 td="/tmp/.iOS"
 #New file size check to make sure not 0kb
-NewSize=`stat -r "$wd/new_versions.xml" | awk '{ print $8}'`
+#NewSize=`stat -r "$wd/new_versions.xml" | awk '{ print $8}'`
 #Proxy:P0rt
 PrX=10.xx.yy.zz:8080
 
