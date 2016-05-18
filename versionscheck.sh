@@ -35,10 +35,13 @@ fi
 
 
 #add file size check to see if it has been updated.
-diff ./new_versions.xml ./old_versions.xml > /dev/null 2>&1
+diff new_versions.xml old_versions.xml > /dev/null 2>&1;
 
 if [[ $? -ne 0 ]]; then
   echo "updated XML. proceeding."
+
+#Used in testing to remove ispws for download
+#sed -i '' "/_9.3.2_/d" old_versions.xml
 
 #List iOS iPads
 xmllint --c14n old_versions.xml > 1.xml
