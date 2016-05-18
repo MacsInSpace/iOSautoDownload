@@ -90,6 +90,8 @@ mv new_versions.xml old_versions.xml
 cd $td
 
 #download links list
+#move ipsw's to folder for auto sorting with Hazel https://www.noodlesoft.com/
+
 for url in $iPadLinks; do
 with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 file=`echo ${url##*/}`
@@ -120,7 +122,6 @@ done
 #mv -R $td/$file $Dd/
 #done
 
-#move ipsw's to folder for auto sorting with Hazel https://www.noodlesoft.com/
 
 else
   echo "No change"
