@@ -55,6 +55,20 @@ iPadLinks=`cat iPadNewToDownload.txt`
   cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'ATV' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > ATVNewToDownload.txt
 #read new links
 ATVLinks=`cat ATVNewToDownload.txt`
+#List iOS iPhones
+  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPhone' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iPhoneNewToDownload.txt
+#read new links
+iPhoneLinks=`cat iPhoneNewToDownload.txt`
+#List iOS iPod
+  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPod' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iPodNewToDownload.txt
+#read new links
+iPodLinks=`cat iPodNewToDownload.txt`
+#List iOS watch
+  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'watch' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iwatchNewToDownload.txt
+#read new links
+iwatchLinks=`cat iwatchNewToDownload.txt`
+
+
 
 #cleanup diffs
 rm 1.xml 
