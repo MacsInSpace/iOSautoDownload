@@ -64,9 +64,9 @@ iPhoneLinks=`cat iPhoneNewToDownload.txt`
 #read new links
 iPodLinks=`cat iPodNewToDownload.txt`
 #List iOS watch
-  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'watch' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iwatchNewToDownload.txt
+#  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'watch' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iwatchNewToDownload.txt
 #read new links
-iwatchLinks=`cat iwatchNewToDownload.txt`
+#iwatchLinks=`cat iwatchNewToDownload.txt`
 
 
 
