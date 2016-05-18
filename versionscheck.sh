@@ -90,23 +90,23 @@ cd $td
 
 #download links list
 for url in $iPadLinks; do
-export ec=0; while [ $ec == 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
+with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 done
 
 for url in $ATVLinks; do
-export ec=0; while [ $ec == 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
+with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 done
 
 #for url in $iPodLinks; do
-#export ec=0; while [ $ec == 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
+#with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 #done
 
 #for url in $iPhoneLinks; do
-#export ec=0; while [ $ec == 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
+#with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 #done
 
 #for url in $iwatchLinks; do
-#export ec=0; while [ $ec == 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
+#with_backoff curl -O "$url" s --connect-timeout 20 2>&1
 #done
 
 #move ipsw's to folder for auto sorting with Hazel https://www.noodlesoft.com/
@@ -122,6 +122,42 @@ else
   date
   exit 0
 fi
+
+#Awesome function for curl retries from http://stackoverflow.com/questions/8350942/how-to-re-run-the-curl-command-automatically-when-the-error-occurs
+#credit to https://github.com/phs
+
+function with_backoff {
+  local max_attempts=${ATTEMPTS-5}
+  local timeout=${TIMEOUT-1}
+  local attempt=0
+  local exitCode=0
+
+  while (( $attempt < $max_attempts ))
+  do
+    set +e
+    "$@"
+    exitCode=$?
+    set -e
+
+    if [[ $exitCode == 0 ]]
+    then
+      break
+    fi
+
+    echo "Failure! Retrying in $timeout.." 1>&2
+    sleep $timeout
+    attempt=$(( attempt + 1 ))
+    timeout=$(( timeout * 2 ))
+  done
+
+  if [[ $exitCode != 0 ]]
+  then
+    echo "You've failed me for the last time! ($@)" 1>&2
+  fi
+
+  return $exitCode
+}
+
 
 
 #done
