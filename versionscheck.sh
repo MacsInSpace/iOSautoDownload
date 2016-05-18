@@ -90,23 +90,23 @@ cd $td
 
 #download links list
 for url in $iPadLinks; do
-export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
+export ec=0; while [ $ec -ne 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
 done
 
 for url in $ATVLinks; do
-export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
+export ec=0; while [ $ec -ne 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
 done
 
 #for url in $iPodLinks; do
-#export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
+#export ec=0; while [ $ec -ne 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
 #done
 
 #for url in $iPhoneLinks; do
-#export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
+#export ec=0; while [ $ec -ne 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
 #done
 
 #for url in $iwatchLinks; do
-#export ec=200; while [ $ec == 200 ]; do /usr/bin/curl -O -C - "$url"; export ec=$?; done
+#export ec=0; while [ $ec -ne 0 ]; do /usr/bin/curl -O -C - "$url" ; export ec=$?; done
 #done
 
 #move ipsw's to folder for auto sorting with Hazel https://www.noodlesoft.com/
