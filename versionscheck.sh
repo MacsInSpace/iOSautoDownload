@@ -7,11 +7,10 @@ wd="/Users/Shared/.iOS"
 Dd=/User/localadmin/Downloads
 #temporary working directory
 td="/tmp/.iOS"
-#New file size check to make sure not 0kb
-#NewSize=`stat -r "$wd/new_versions.xml" | awk '{ print $8}'`
 #Proxy:P0rt
 PrX=10.xx.yy.zz:8080
 
+#create working and temporaary directories if not there already
 if [ ! -d $wd ]; then
   mkdir -p $wd;
 fi;
@@ -24,23 +23,17 @@ chmod -fR 777 $td
 
 cd $wd
 
-#while true; do
-if [ ! -f new_versions.xml ]; then
+#check for new versions 
+if [ ! -f old_versions.xml ]; then
   #curl --proxy $PrX -L -o .new_versions.xml -s $URL > /dev/null 2>&1;
-  curl -L -o new_versions.xml -s $URL > /dev/null 2>&1
-  
-  if [ -s new_versions.xml ]; then
-        echo 'is there. continuing'
-     else
-        exit 0
-  fi
+  curl -L -o old_versions.xml -s $URL --connect-timeout 20 2>&1;
+  exit 0
+  else
+  #curl --proxy $PrX -L -o .new_versions.xml -s $URL > /dev/null 2>&1;
+  curl -L -o new_versions.xml -s $URL --connect-timeout 20 2>&1;
 fi
 
-if [ ! -f old_versions.xml ]; then
-  mv new_versions.xml old_versions.xml
-  exit 0
-fi
-#NOT WORKING FROM HERE DOWN
+
 #add file size check to see if it has been updated.
 diff ./new_versions.xml ./old_versions.xml > /dev/null 2>&1
 
