@@ -113,14 +113,30 @@ iPodLinks=`cat iPodNewToDownload.txt`
 
 
 #cleanup diffs and xml
+if [ -f 1.xml ]; then 
 rm 1.xml 
-rm 2.xml
+fi
+if [ -f 2.xml ]; then 
+rm 2.xml 
+fi
+if [ -f diff.xml ]; then
 rm diff.xml
+fi
+if [ -f iPadNewToDownload.xml ]; then
 rm iPadNewToDownload.txt
+fi
+if [ -f ATVNewToDownload.xml ]; then
 rm ATVNewToDownload.txt
+fi
+if [ -f iPhoneNewToDownload.xml ]; then
 rm iPhoneNewToDownload.txt
+fi
+if [ -f iPodNewToDownload.xml ]; then
 rm iPodNewToDownload.txt
+fi
+#if [ -f 2.xml ]; then
 #rm iwatchNewToDownload.txt
+#fi
 mv new_versions.xml old_versions.xml
 
 #Move to tepmorary directory to download. If we loose power, we dont want half downloaded files taking up space.
