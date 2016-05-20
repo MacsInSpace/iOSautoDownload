@@ -18,10 +18,12 @@ export HTTPS_PROXY=$http_proxy
 
 #example
 #url="http://appldnld.apple.com/ios9.3.2/031-61477-20160516-6A0A9404-13A7-11E6-AB79-8AD6400DF7EB/iPad20,1_9.3.2_13F69_Restore.ipsw"
-function sort{
-model=`echo ${url##*/} | cut -d '_' -f 1`
-echo $model
+
 # ( model is iPad2,1 )
+
+
+function sort {
+model=`echo ${url##*/} | cut -d '_' -f 1`
 
 if [[ "$model" == "iPad2,1" || "$model" == "iPad2,2" || "$model" == "iPad2,3" || "$model" == "iPad2,4" ]]; then
 folder='iPad2'
@@ -64,7 +66,6 @@ folder='unknown'
 
 else echo "unknown iOS"
 fi
-echo $folder
 }
 
 
