@@ -1,11 +1,11 @@
 #!/bin/bash
+
 #versions url
 URL="http://phobos.apple.com/versions"
 #working directory
 #wd="/Users/localadmin/Desktop/iOS"
 wd="/Users/Shared/.iOS"
 #final directory for sorting with Hazel https://www.noodlesoft.com/
-
 Dd=/Users/ladmin/Downloads
 #temporary working directory
 td="/var/tmp/.iOS"
@@ -14,8 +14,64 @@ export http_proxy=http://10.xx.yy.zz:8080
 export https_proxy=$http_proxy
 export HTTP_PROXY=$http_proxy
 export HTTPS_PROXY=$http_proxy
+###################################################################################
+
+#example
+#url="http://appldnld.apple.com/ios9.3.2/031-61477-20160516-6A0A9404-13A7-11E6-AB79-8AD6400DF7EB/iPad20,1_9.3.2_13F69_Restore.ipsw"
+function sort{
+model=`echo ${url##*/} | cut -d '_' -f 1`
+echo $model
+# ( model is iPad2,1 )
+
+if [[ "$model" == "iPad2,1" || "$model" == "iPad2,2" || "$model" == "iPad2,3" || "$model" == "iPad2,4" ]]; then
+folder='iPad2'
+
+elif [[ "$model" == "iPad2,5" || "$model" == "iPad2,6" || "$model" == "iPad2,7" ]]; then
+folder='iPad Mini'
+
+elif [[ "$model" == "iPad3,1" || "$model" == "iPad3,2" || "$model" == "iPad3,3" ]]; then
+folder='iPad3'
+
+elif [[ "$model" == "iPad3,4" || "$model" == "iPad3,5" || "$model" == "iPad3,6" ]]; then
+folder='iPad4'
+
+elif [[ "$model" == "iPad3,4" || "$model" == "iPad3,5" || "$model" == "iPad3,6" ]]; then
+folder='iPad4'
+
+elif [[ "$model" == "iPad4,1" || "$model" == "iPad4,2" || "$model" == "iPad4,3" ]]; then
+folder='iPad Air'
+
+elif [[ "$model" == "iPad4,4" || "$model" == "iPad4,5" || "$model" == "iPad4,6" ]]; then
+folder='iPad Mini 2'
+
+elif [[ "$model" == "iPad4,7" || "$model" == "iPad4,8" || "$model" == "iPad4,9" ]]; then
+folder='iPad Mini 3'
+
+elif [[ "$model" == "iPad5,1" || "$model" == "iPad5,2" ]]; then
+folder='iPad Mini 4'
+
+elif [[ "$model" == "iPad5,3" || "$model" == "iPad5,4" ]]; then
+folder='iPad Air 2'
+
+elif [[ "$model" == "iPad6,3" || "$model" == "iPad6,4" ]]; then
+folder='iPad Pro 9.7'
+
+elif [[ "$model" == "iPad6,7" || "$model" == "iPad6,8" ]]; then
+folder='iPad Pro'
+
+elif [[ "$model" == "iPad"* ]]; then
+folder='unknown'
+
+else echo "unknown iOS"
+fi
+echo $folder
+}
 
 
+
+
+
+######################################################################################
 #Awesome function for curl retries from http://stackoverflow.com/questions/8350942/how-to-re-run-the-curl-command-automatically-when-the-error-occurs
 #credit to https://github.com/phs
 
