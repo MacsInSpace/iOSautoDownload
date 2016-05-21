@@ -71,12 +71,24 @@ folder='unknown iPad'
 
 #ATV
 
+elif [[ "$model" == "AppleTV2,1" ]]; then
+folder='AppleTV2'
+
+elif [[ "$model" == "AppleTV3,1" || "$model" == "AppleTV3,2" ]]; then
+folder='AppleTV3'
+
+elif [[ "$model" == "AppleTV5,3" ]]; then
+folder='AppleTV4'
+
 elif [[ "$model" == "AppleTV"* ]]; then
 folder='unknown AppleTV'
 
 ###################################################################################
 
 #iPhone
+
+elif [[ "$model" == "iPad6,7" || "$model" == "iPad6,8" ]]; then
+folder='iPad Pro'
 
 elif [[ "$model" == "iPhone"* ]]; then
 folder='unknown iPhone'
