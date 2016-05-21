@@ -24,6 +24,9 @@ export HTTPS_PROXY=$http_proxy
 
 function sort {
 model=`echo ${url##*/} | cut -d '_' -f 1`
+###################################################################################
+
+#iPads 
 
 if [[ "$model" == "iPad2,1" || "$model" == "iPad2,2" || "$model" == "iPad2,3" || "$model" == "iPad2,4" ]]; then
 folder='iPad2'
@@ -62,15 +65,34 @@ elif [[ "$model" == "iPad6,7" || "$model" == "iPad6,8" ]]; then
 folder='iPad Pro'
 
 elif [[ "$model" == "iPad"* ]]; then
-folder='unknown'
+folder='unknown iPad'
+
+###################################################################################
+
+#ATV
+
+elif [[ "$model" == "AppleTV"* ]]; then
+folder='unknown AppleTV'
+
+###################################################################################
+
+#iPhone
+
+elif [[ "$model" == "iPhone"* ]]; then
+folder='unknown iPhone'
+
+###################################################################################
+
+#iPod
+
+elif [[ "$model" == "iPod"* ]]; then
+folder='unknown iPod'
+
+###################################################################################
 
 else echo "unknown iOS"
 fi
 }
-
-
-
-
 
 ######################################################################################
 #Awesome function for curl retries from http://stackoverflow.com/questions/8350942/how-to-re-run-the-curl-command-automatically-when-the-error-occurs
