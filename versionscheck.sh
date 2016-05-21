@@ -3,10 +3,9 @@
 #versions url
 URL="http://phobos.apple.com/versions"
 #working directory
-#wd="/Users/localadmin/Desktop/iOS"
 wd="/Users/Shared/.iOS"
-#final directory for sorting with Hazel https://www.noodlesoft.com/
-Dd=/Users/ladmin/Downloads
+#final root directory of sorting
+RootDir=/Volumes/Data/iOS
 #temporary working directory
 td="/var/tmp/.iOS"
 #Proxy:P0rt
@@ -18,8 +17,6 @@ export HTTPS_PROXY=$http_proxy
 
 #example
 #url="http://appldnld.apple.com/ios9.3.2/031-61477-20160516-6A0A9404-13A7-11E6-AB79-8AD6400DF7EB/iPad20,1_9.3.2_13F69_Restore.ipsw"
-
-# ( model is iPad2,1 )
 
 
 function sort {
@@ -163,7 +160,7 @@ function with_backoff {
   return $exitCode
 }
 
-
+######################################################################################
 
 #create working and temporary directories if not there already
 if [ ! -d $wd ]; then
@@ -177,6 +174,7 @@ fi;
 chmod -fR 777 $td
 
 cd $wd
+######################################################################################
 
 #check for new versions 
 if [ ! -f old_versions.xml ]; then
@@ -192,6 +190,7 @@ diff new_versions.xml old_versions.xml > /dev/null 2>&1;
 
 if [[ $? -ne 0 ]]; then
   echo "updated XML. proceeding."
+######################################################################################
 
 #Used in testing to remove ispws for download
 #sed -i '' "/_9.3.2_/d" old_versions.xml
@@ -202,6 +201,8 @@ xmllint --c14n new_versions.xml > 2.xml
 diff 1.xml 2.xml > diff.xml
 if [[ $? -ne 0 ]]; then
   echo "updated XML. proceeding."
+
+######################################################################################
 
 #List iOS iPads
   cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPad' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iPadNewToDownload.txt
@@ -224,7 +225,7 @@ iPodLinks=`cat iPodNewToDownload.txt`
 #read new links
 #iwatchLinks=`cat iwatchNewToDownload.txt`
 
-
+######################################################################################
 
 #cleanup diffs and xml
 if [ -f 1.xml ]; then 
@@ -252,6 +253,8 @@ fi
 #rm iwatchNewToDownload.txt
 #fi
 mv new_versions.xml old_versions.xml
+
+######################################################################################
 
 #Move to tepmorary directory to download. If we loose power, we dont want half downloaded files taking up space.
 #My site always looses power
@@ -295,6 +298,7 @@ done
 #chmod 777 $Dd/$file
 #done
 
+######################################################################################
 
 else
   echo "No change"
