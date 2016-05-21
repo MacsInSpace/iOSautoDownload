@@ -65,7 +65,7 @@ elif [[ "$model" == "iPad6,7" || "$model" == "iPad6,8" ]]; then
 folder='iPad Pro'
 
 elif [[ "$model" == "iPad"* ]]; then
-folder='unknown iPad'
+folder='iPad'
 
 ###################################################################################
 
@@ -81,24 +81,39 @@ elif [[ "$model" == "AppleTV5,3" ]]; then
 folder='AppleTV4'
 
 elif [[ "$model" == "AppleTV"* ]]; then
-folder='unknown AppleTV'
+folder='AppleTV'
 
 ###################################################################################
 
 #iPhone
 
-elif [[ "$model" == "iPad6,7" || "$model" == "iPad6,8" ]]; then
-folder='iPad Pro'
-
-elif [[ "$model" == "iPhone"* ]]; then
-folder='unknown iPhone'
+#elif [[ "$model" == "iPhone"* ]]; then
+#folder='iPhone'
 
 ###################################################################################
 
 #iPod
 
+elif [[ "$model" == "iPod1,1" ]]; then
+folder='iPod1'
+
+elif [[ "$model" == "iPod2,1" ]]; then
+folder='iPod2'
+
+elif [[ "$model" == "iPod3,1" ]]; then
+folder='iPod3'
+
+elif [[ "$model" == "iPod4,1" ]]; then
+folder='iPod4'
+
+elif [[ "$model" == "iPod5,1" ]]; then
+folder='iPod5'
+
+elif [[ "$model" == "iPod7,1" ]]; then
+folder='iPod6'
+
 elif [[ "$model" == "iPod"* ]]; then
-folder='unknown iPod'
+folder='iPod'
 
 ###################################################################################
 
