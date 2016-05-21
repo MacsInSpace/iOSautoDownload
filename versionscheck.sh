@@ -18,7 +18,6 @@ export HTTPS_PROXY=$http_proxy
 #example
 #url="http://appldnld.apple.com/ios9.3.2/031-61477-20160516-6A0A9404-13A7-11E6-AB79-8AD6400DF7EB/iPad20,1_9.3.2_13F69_Restore.ipsw"
 
-
 function sort {
 model=`echo ${url##*/} | cut -d '_' -f 1`
 ###################################################################################
