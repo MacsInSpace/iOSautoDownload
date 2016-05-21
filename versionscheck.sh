@@ -265,36 +265,41 @@ cd $td
 for url in $iPadLinks; do
 with_backoff curl -O "$url" -s --connect-timeout 20 2>&1
 file=`echo ${url##*/}`
-mv $td/$file $Dd/
-chmod 777 $Dd/$file
+sort
+rm RootDir/iPad/$folder/$model*
+mv td/$file RootDir/iPad/$folder/$file
 done
 
 for url in $ATVLinks; do
 with_backoff curl -O "$url" -s --connect-timeout 20 2>&1
 file=`echo ${url##*/}`
-mv $td/$file $Dd/
-chmod 777 $Dd/$file
+sort
+rm RootDir/ATV/$folder/$model*
+mv td/$file RootDir/ATV/$folder/$file
 done
 
 #for url in $iPodLinks; do
 #with_backoff curl -O "$url" -s --connect-timeout 20 2>&1
 #file=`echo ${url##*/}`
-#mv $td/$file $Dd/
-#chmod 777 $Dd/$file
+#sort
+#rm RootDir/iPod/$folder/$model*
+#mv td/$file RootDir/iPod/$folder/$file
 #done
 
 #for url in $iPhoneLinks; do
 #with_backoff curl -O "$url" -s --connect-timeout 20 2>&1
 #file=`echo ${url##*/}`
-#mv $td/$file $Dd/
-#chmod 777 $Dd/$file
+#sort
+#rm RootDir/iPhone/$folder/$model*
+#mv td/$file RootDir/iPhone/$folder/$file
 #done
 
 #for url in $iwatchLinks; do
 #with_backoff curl -O "$url" -s --connect-timeout 20 2>&1
 #file=`echo ${url##*/}`
-#mv $td/$file $Dd/
-#chmod 777 $Dd/$file
+#sort
+#rm RootDir/watch/$folder/$model*
+#mv td/$file RootDir/watch/$folder/$file
 #done
 
 ######################################################################################
