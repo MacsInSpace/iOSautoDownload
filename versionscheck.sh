@@ -64,6 +64,8 @@ folder='iPad Pro 9.7'
 elif [[ "$model" == "iPad6,7" || "$model" == "iPad6,8" ]]; then
 folder='iPad Pro'
 
+
+
 elif [[ "$model" == "iPad"* ]]; then
 folder='iPad'
 
@@ -79,6 +81,8 @@ folder='AppleTV3'
 
 elif [[ "$model" == "AppleTV5,3" ]]; then
 folder='AppleTV4'
+
+
 
 elif [[ "$model" == "AppleTV"* ]]; then
 folder='AppleTV'
@@ -111,6 +115,8 @@ folder='iPod5'
 
 elif [[ "$model" == "iPod7,1" ]]; then
 folder='iPod6'
+
+
 
 elif [[ "$model" == "iPod"* ]]; then
 folder='iPod'
