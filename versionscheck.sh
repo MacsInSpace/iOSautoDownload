@@ -2,10 +2,10 @@
 
 #versions url
 URL="http://phobos.apple.com/versions"
+#final root directory of sorting
+RootDir="/Volumes/Data/iOS"
 #working directory
 wd="/Users/Shared/.iOS"
-#final root directory of sorting
-RootDir=/Volumes/Data/iOS
 #temporary working directory
 td="/var/tmp/.iOS"
 #Proxy:P0rt
