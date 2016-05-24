@@ -87,8 +87,8 @@ folder='AppleTV'
 
 #iPhone
 
-#elif [[ "$model" == "iPhone"* ]]; then
-#folder='iPhone'
+elif [[ "$model" == "iPhone"* ]]; then
+folder='iPhone'
 
 ###################################################################################
 
