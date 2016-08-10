@@ -4,8 +4,9 @@ URL="http://phobos.apple.com/versions"
 #working directory
 #wd="/Users/localadmin/Desktop/iOS"
 wd="/Users/Shared/.iOS"
-#final directory for sorting with Hazel https://www.noodlesoft.com/
-
+#Save directory
+#Sd="/Volumes/Data/ServiceData/%%%%%/iOS/"
+#final directory (for sorting with Hazel https://www.noodlesoft.com/ when not using ^Sd^)
 Dd=/Users/ladmin/Downloads
 #temporary working directory
 td="/var/tmp/.iOS"
