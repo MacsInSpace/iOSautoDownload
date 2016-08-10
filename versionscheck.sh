@@ -204,25 +204,15 @@ if [[ $? -ne 0 ]]; then
 ######################################################################################
 
 #List iOS iPads
-  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPad' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iPadNewToDownload.txt
-#read new links
-iPadLinks=`cat iPadNewToDownload.txt`
+iPadLinks=`cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPad' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1`
 #List iOS ATVs
-  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'ATV' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > ATVNewToDownload.txt
-#read new links
-ATVLinks=`cat ATVNewToDownload.txt`
+ATVLinks=`cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'ATV' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1`
 #List iOS iPhones
-  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPhone' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iPhoneNewToDownload.txt
-#read new links
-iPhoneLinks=`cat iPhoneNewToDownload.txt`
+iPhoneLinks=`cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPhone' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1`
 #List iOS iPod
-  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPod' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iPodNewToDownload.txt
-#read new links
-iPodLinks=`cat iPodNewToDownload.txt`
+iPodLinks=`cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'iPod' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1`
 #List iOS watch
-#  cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'watch' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1 > iwatchNewToDownload.txt
-#read new links
-#iwatchLinks=`cat iwatchNewToDownload.txt`
+#iwatchLinks=`cat ./diff.xml | grep 'http' | grep 'ipsw' | grep 'watch' | sort -u | cut -d '>' -f 3 | cut -d '<' -f 1`
 
 ######################################################################################
 
@@ -236,21 +226,6 @@ fi
 if [ -f diff.xml ]; then
 rm diff.xml
 fi
-if [ -f iPadNewToDownload.xml ]; then
-rm iPadNewToDownload.txt
-fi
-if [ -f ATVNewToDownload.xml ]; then
-rm ATVNewToDownload.txt
-fi
-if [ -f iPhoneNewToDownload.xml ]; then
-rm iPhoneNewToDownload.txt
-fi
-if [ -f iPodNewToDownload.xml ]; then
-rm iPodNewToDownload.txt
-fi
-#if [ -f 2.xml ]; then
-#rm iwatchNewToDownload.txt
-#fi
 mv new_versions.xml old_versions.xml
 
 ######################################################################################
